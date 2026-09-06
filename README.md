@@ -22,9 +22,8 @@ A data engineering project built on **Databricks** and **Delta Lake** that inges
 14. [Key Engineering Decisions](#14-key-engineering-decisions)
 15. [Challenges & Solutions](#15-challenges--solutions)
 16. [Reproducibility / How to Run](#16-reproducibility--how-to-run)
-17. [Interview Walkthrough](#17-interview-walkthrough)
-18. [Future Improvements](#18-future-improvements)
-19. [Conclusion](#19-conclusion)
+17. [Future Improvements](#18-future-improvements)
+18. [Conclusion](#19-conclusion)
 
 ---
 
@@ -478,7 +477,7 @@ Once the Gold layer is populated, all queries in `Project Queries/` can be run i
 ---
 
 
-## 18. Future Improvements
+## 17. Future Improvements
 
 - **Orchestration:** Introduce a workflow tool (e.g. Databricks Workflows) to schedule and sequence notebook execution with dependency management and retry logic.
 - **Data quality checks:** Add explicit assertion-based checks (e.g. null counts, row count reconciliation between Bronze and Silver) as a dedicated quality gate notebook.
@@ -489,7 +488,7 @@ Once the Gold layer is populated, all queries in `Project Queries/` can be run i
 
 ---
 
-## 19. Conclusion
+## 18. Conclusion
 
 This project demonstrates a complete, production-structured data engineering pipeline built on Databricks and Delta Lake. It covers the full lifecycle from raw CSV ingestion through to a BI-ready Star Schema, with particular attention to data quality challenges that are common in real-world historical datasets — encoding corruption, inconsistent formatting, co-hosted events, and ambiguous date representations.
 
