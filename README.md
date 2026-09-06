@@ -477,29 +477,6 @@ Once the Gold layer is populated, all queries in `Project Queries/` can be run i
 
 ---
 
-## 17. Interview Walkthrough
-
-### Architecture
-
-The pipeline follows a Medallion Architecture. Bronze is a raw landing zone — no transformations, just typed Delta tables. Silver applies all cleaning, standardisation, and enrichment logic. Gold is the analytical model, structured for BI consumption. Seed tables live in Silver and act as reference data for both Silver transformations and Gold enrichment.
-
-### ETL/ELT Logic
-
-The pipeline is ETL: data is transformed in PySpark before being written to the target layer. The ingestion notebook is generic and loop-driven. Silver notebooks are purpose-built per dataset. Gold notebooks read from Silver and apply final modelling logic.
-
-### Data Modelling
-
-The Gold layer is a Star Schema. `gold_match_temperature` and `gold_team_all_time_standing` are fact tables at match grain. `dim_tournament` and `dim_match_stage` are dimensions. The team standings table is deliberately unpivoted (one row per team per match) to make aggregations simple and avoid complex pivot logic in SQL.
-
-### Temperature Enrichment
-
-The enrichment is a two-stage join: first on `month` and `host_country` to get the monthly average, then on the hour of kick-off against the time-of-day adjustment seed to apply a contextual offset. The host country mapping is carefully aligned to the temperature dataset's naming convention to prevent silent join failures.
-
-### Data Quality
-
-Key challenges handled: date reconstruction to avoid two-digit year ambiguity, UTF-8 name correction via seed lookup, co-hosted tournament city-based host country derivation, attendance normalisation from inconsistent decimal formatting, duplicate match removal via window function, and replay match flagging.
-
----
 
 ## 18. Future Improvements
 
